@@ -1,3 +1,6 @@
+import os
+
+
 class g_var :
 
     root = "./"
@@ -14,8 +17,11 @@ class g_var :
 
     @staticmethod
     def read_env( file_path = ".env" ):
-       with open( file_path, "r" ) as env_file:
-           
+
+        if not os.path.exists( file_path ):
+            return dict(os.environ)
+
+        with open( file_path, "r" ) as env_file:
            lines = env_file.readlines()
            data = {}
            for line in lines:
